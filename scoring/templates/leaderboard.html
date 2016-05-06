@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>{{ game }}</h1>
+<h2>Leaderboard</h2>
+<a href="{% url 'data-entry' game_id=game.id %}">Enter data</a>
+<table>
+    <tr>
+        <th>Placing</th>
+        <th>Player</th>
+        <th>Score</th>
+    </tr>
+    {% for score in scores %}
+    <tr>
+        <td>{{ score.position }}</td>
+        <td>{{ score.player }}</td>
+        <td>{{ score.score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>{{ game }}</h1>
+<h2>Enter data</h2>
+<a href="{% url 'leaderboard' game_id=game.id %}">Leaderboard</a>
+<table>
+    <tr>
+        <th>Player</th>
+        {% for round in rounds %}
+        <th>Round {{ round }}</th>
+        {% endfor %}
+    </tr>
+    {% for score in scores %}
+    <tr>
+        <td>{{ score.player }}</td>
+        {% for round_score in score.round_scores %}
+        <td><input value="{{ round_score.score|default:0 }}" /></td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
