@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static from staticfiles %}
+
 
 {% block content %}
 <h1>{{ game }}</h1>
@@ -16,9 +18,14 @@
     <tr>
         <td>{{ score.player }}</td>
         {% for round_score in score.round_scores %}
-        <td><input value="{{ round_score.score|default:0 }}" /></td>
+        <td><input type="number" data-score="{{ score.pk }}" data-round="{{ forloop.counter }}" value="{{ round_score.score }}" /></td>
         {% endfor %}
     </tr>
     {% endfor %}
 </table>
+{% endblock %}
+
+{% block script %}
+{{ block.super }}
+<script src="{% static 'entry.js' %}"></script>
 {% endblock %}

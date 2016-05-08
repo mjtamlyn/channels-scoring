@@ -1,6 +1,6 @@
+channels
 daphne
 Django
-django-channels
 dj-database-url
 asgi_redis
 psycopg2

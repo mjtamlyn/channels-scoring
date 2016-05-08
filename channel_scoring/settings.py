@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'scoring',
+
     'channels',
 
     'django.contrib.admin',
@@ -51,6 +52,16 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'channel_scoring.urls'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'channel_scoring.routing.routes',
+    },
+}
 
 WSGI_APPLICATION = 'channel_scoring.wsgi.application'
 
@@ -94,6 +105,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': DEBUG,
         },
     },
 ]
